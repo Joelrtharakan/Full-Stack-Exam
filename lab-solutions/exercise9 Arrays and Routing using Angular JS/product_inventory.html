@@ -1,133 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="inventoryApp">
 <head>
-    <title>Product Inventory</title>
+    <title>Product Inventory System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #3f51b5;
+            text-align: center;
         }
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        input, button {
-            padding: 8px;
-            margin: 5px;
+        label {
+            display: block;
+            color: #3f51b5;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
         button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
+            background-color: white;
+            color: black;
+            padding: 12px 30px;
+            margin-top: 20px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            font-size: 16px;
             cursor: pointer;
+        }
+        button:hover {
+            background-color: #f0f0f0;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
+            padding: 12px;
+            text-align: center;
         }
         th {
-            background-color: #4CAF50;
+            background-color: #66bb6a;
             color: white;
+            font-weight: bold;
         }
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
-            padding: 5px 10px;
-            border: none;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:nth-child(odd) {
+            background-color: #e8e8e8;
+        }
+        td {
+            color: #3f51b5;
+        }
+        .delete-link {
+            color: #f44336;
             cursor: pointer;
+            text-decoration: none;
+        }
+        .delete-link:hover {
+            text-decoration: underline;
+        }
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
         }
     </style>
 </head>
-<body>
+<body ng-controller="ProductController">
     <div class="container">
-        <h2>Product Inventory Management</h2>
+        <h1>Product Inventory System</h1>
         
-        <div>
-            <input type="text" id="productName" placeholder="Product Name">
-            <input type="number" id="productPrice" placeholder="Price">
-            <input type="number" id="productQty" placeholder="Quantity">
-            <button onclick="addProduct()">Add Product</button>
-        </div>
+        <label>Enter the Product Name:</label>
+        <input type="text" ng-model="productName" placeholder="Product Name">
         
-        <input type="text" id="searchBox" placeholder="Search products..." onkeyup="searchProducts()">
+        <label>Enter the Product Price:</label>
+        <input type="number" ng-model="productPrice" placeholder="Product Price">
         
-        <table id="productTable">
+        <button ng-click="addProduct()">Add Product</button>
+        
+        <hr>
+        
+        <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th>Action</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
-            <tbody id="productList">
+            <tbody>
+                <tr ng-repeat="product in products">
+                    <td>{{product.name}}</td>
+                    <td>Rs.{{product.price}}</td>
+                    <td><a href="#" class="delete-link" ng-click="deleteProduct($index)">[delete]</a></td>
+                </tr>
             </tbody>
         </table>
     </div>
 
     <script>
-        let products = [];
-        let nextId = 1;
-
-        function addProduct() {
-            const name = document.getElementById('productName').value;
-            const price = parseFloat(document.getElementById('productPrice').value);
-            const qty = parseInt(document.getElementById('productQty').value);
+        var app = angular.module('inventoryApp', []);
+        
+        app.controller('ProductController', function($scope) {
+            $scope.products = [];
             
-            if (name && price > 0 && qty > 0) {
-                products.push({
-                    id: nextId++,
-                    name: name,
-                    price: price,
-                    quantity: qty
-                });
-                
-                displayProducts();
-                
-                document.getElementById('productName').value = '';
-                document.getElementById('productPrice').value = '';
-                document.getElementById('productQty').value = '';
-            }
-        }
-
-        function deleteProduct(id) {
-            products = products.filter(p => p.id !== id);
-            displayProducts();
-        }
-
-        function displayProducts(filteredProducts = products) {
-            const tbody = document.getElementById('productList');
-            tbody.innerHTML = '';
+            $scope.addProduct = function() {
+                if ($scope.productName && $scope.productPrice) {
+                    $scope.products.push({
+                        name: $scope.productName,
+                        price: $scope.productPrice
+                    });
+                    $scope.productName = '';
+                    $scope.productPrice = '';
+                }
+            };
             
-            filteredProducts.forEach(product => {
-                const total = product.price * product.quantity;
-                const row = `<tr>
-                    <td>${product.id}</td>
-                    <td>${product.name}</td>
-                    <td>$${product.price.toFixed(2)}</td>
-                    <td>${product.quantity}</td>
-                    <td>$${total.toFixed(2)}</td>
-                    <td><button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button></td>
-                </tr>`;
-                tbody.innerHTML += row;
-            });
-        }
-
-        function searchProducts() {
-            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
-            const filtered = products.filter(p => 
-                p.name.toLowerCase().includes(searchTerm)
-            );
-            displayProducts(filtered);
-        }
+            $scope.deleteProduct = function(index) {
+                $scope.products.splice(index, 1);
+            };
+        });
     </script>
 </body>
 </html>

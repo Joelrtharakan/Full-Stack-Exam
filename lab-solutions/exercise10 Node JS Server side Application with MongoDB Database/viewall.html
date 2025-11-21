@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Users</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            background: #f0f0f0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #4040ff; 
+            text-align: center; 
+        }
+        .user-card {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f8ff;
+            border-radius: 5px;
+            border-left: 4px solid #4040ff;
+        }
+        .user-card h3 {
+            color: #4040ff;
+            margin-top: 0;
+        }
+        .user-card p {
+            margin: 8px 0;
+            color: #333;
+        }
+        .user-card strong {
+            color: #6060ff;
+            display: inline-block;
+            width: 150px;
+        }
+        .no-data {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-size: 18px;
+        }
+        a { 
+            color: #6060ff; 
+            text-decoration: underline; 
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Registered Users</h1>
+        <div id="usersList">
+        </div>
+        <a href="/">Back to Registration Form</a>
+    </div>
+</body>
+</html>

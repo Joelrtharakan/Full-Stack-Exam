@@ -91,33 +91,18 @@
 
     <script>
         function calculateEMI() {
-            var principal = parseFloat(document.getElementById('loanAmount').value) || 0;
-            var annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
-            var tenureYears = parseFloat(document.getElementById('tenure').value) || 0;
+            const P = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const R = parseFloat(document.getElementById('interestRate').value) / 12 / 100 || 0;
+            const N = parseFloat(document.getElementById('tenure').value) * 12 || 0;
 
-            // Convert years to months
-            var tenureMonths = tenureYears * 12;
+            const emi = (P && R && N) ? P * R * Math.pow(1 + R, N) / (Math.pow(1 + R, N) - 1) : 0;
+            const total = emi * N;
+            const interest = total - P;
 
-            // Calculate monthly interest rate
-            var monthlyRate = annualRate / 12 / 100;
-
-            var emi = 0;
-            var totalPayment = 0;
-            var totalInterest = 0;
-
-            if (principal > 0 && annualRate > 0 && tenureMonths > 0) {
-                var numerator = principal * monthlyRate * Math.pow(1 + monthlyRate, tenureMonths);
-                var denominator = Math.pow(1 + monthlyRate, tenureMonths) - 1;
-                emi = numerator / denominator;
-
-                totalPayment = emi * tenureMonths;
-                totalInterest = totalPayment - principal;
-            }
-
-            document.getElementById('displayLoanAmount').textContent = '₹' + Math.round(principal);
-            document.getElementById('totalInterest').textContent = '₹' + Math.round(totalInterest);
+            document.getElementById('displayLoanAmount').textContent = '₹' + Math.round(P);
+            document.getElementById('totalInterest').textContent = '₹' + Math.round(interest);
             document.getElementById('emi').textContent = '₹' + Math.round(emi);
-            document.getElementById('totalRepayment').textContent = '₹' + Math.round(totalPayment);
+            document.getElementById('totalRepayment').textContent = '₹' + Math.round(total);
         }
     </script>
 </body>
