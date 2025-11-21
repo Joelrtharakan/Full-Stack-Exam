@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan EMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 2px solid #007bff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .results {
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .result-item {
+            margin: 10px 0;
+        }
+
+        .formula {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loan EMI Calculator</h1>
+
+        <label>Loan Amount (Rs.):</label>
+        <input type="number" id="loanAmount" onkeyup="calculateEMI()">
+
+        <label>Annual Interest Rate (%):</label>
+        <input type="number" id="interestRate" onkeyup="calculateEMI()">
+
+        <label>Tenure (Years):</label>
+        <input type="number" id="tenure" onkeyup="calculateEMI()">
+
+        <div class="results">
+            <div class="result-item">
+                <strong>Loan Amount:</strong> <span id="displayLoanAmount">₹0</span>
+            </div>
+
+            <div class="result-item">
+                <strong>Total Interest:</strong> <span id="totalInterest">₹0</span>
+            </div>
+
+            <div class="result-item">
+                <strong>EMI:</strong> <span id="emi">₹0</span>
+            </div>
+
+            <div class="result-item">
+                <strong>Total Repayment:</strong> <span id="totalRepayment">₹0</span>
+            </div>
+        </div>
+
+        <div class="formula">
+            <p>EMI = P × R × (1 + R)^N / [(1 + R)^N - 1]</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateEMI() {
+            var principal = parseFloat(document.getElementById('loanAmount').value) || 0;
+            var annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            var tenureYears = parseFloat(document.getElementById('tenure').value) || 0;
+
+            // Convert years to months
+            var tenureMonths = tenureYears * 12;
+
+            // Calculate monthly interest rate
+            var monthlyRate = annualRate / 12 / 100;
+
+            var emi = 0;
+            var totalPayment = 0;
+            var totalInterest = 0;
+
+            if (principal > 0 && annualRate > 0 && tenureMonths > 0) {
+                var numerator = principal * monthlyRate * Math.pow(1 + monthlyRate, tenureMonths);
+                var denominator = Math.pow(1 + monthlyRate, tenureMonths) - 1;
+                emi = numerator / denominator;
+
+                totalPayment = emi * tenureMonths;
+                totalInterest = totalPayment - principal;
+            }
+
+            document.getElementById('displayLoanAmount').textContent = '₹' + Math.round(principal);
+            document.getElementById('totalInterest').textContent = '₹' + Math.round(totalInterest);
+            document.getElementById('emi').textContent = '₹' + Math.round(emi);
+            document.getElementById('totalRepayment').textContent = '₹' + Math.round(totalPayment);
+        }
+    </script>
+</body>
+</html>

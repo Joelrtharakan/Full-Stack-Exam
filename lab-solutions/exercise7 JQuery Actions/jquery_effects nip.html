@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Effects Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .demo-box {
+            background-color: #3498db;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .style-controls {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .style-btn {
+            background-color: #e74c3c;
+            margin: 5px;
+        }
+
+        .style-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .info {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>jQuery Effects & Style Manipulation Demo</h1>
+
+    <div class="container">
+        <div class="demo-box" id="box">
+            Magic Box - Watch Me Change!
+        </div>
+
+        <h2>Effects Controls</h2>
+        <div class="controls">
+            <button id="showBtn">Show</button>
+            <button id="hideBtn">Hide</button>
+            <button id="toggleBtn">Toggle</button>
+            <button id="fadeInBtn">Fade In</button>
+            <button id="fadeOutBtn">Fade Out</button>
+            <button id="fadeToggleBtn">Fade Toggle</button>
+            <button id="slideUpBtn">Slide Up</button>
+            <button id="slideDownBtn">Slide Down</button>
+            <button id="slideToggleBtn">Slide Toggle</button>
+            <button id="animateBtn">Animate</button>
+        </div>
+
+        <div class="style-controls">
+            <h2>CSS Style Manipulation</h2>
+            <button class="style-btn" id="colorBtn">Change Color</button>
+            <button class="style-btn" id="sizeBtn">Change Size</button>
+            <button class="style-btn" id="borderBtn">Add Border</button>
+            <button class="style-btn" id="rotateBtn">Rotate</button>
+            <button class="style-btn" id="shadowBtn">Add Shadow</button>
+            <button class="style-btn" id="resetBtn">Reset Styles</button>
+        </div>
+
+        <div class="info">
+            Click the buttons to see different jQuery effects and style changes!
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Effects
+            $('#showBtn').click(function() {
+                $('#box').show(500);
+            });
+
+            $('#hideBtn').click(function() {
+                $('#box').hide(500);
+            });
+
+            $('#toggleBtn').click(function() {
+                $('#box').toggle(500);
+            });
+
+            $('#fadeInBtn').click(function() {
+                $('#box').fadeIn(1000);
+            });
+
+            $('#fadeOutBtn').click(function() {
+                $('#box').fadeOut(1000);
+            });
+
+            $('#fadeToggleBtn').click(function() {
+                $('#box').fadeToggle(1000);
+            });
+
+            $('#slideUpBtn').click(function() {
+                $('#box').slideUp(500);
+            });
+
+            $('#slideDownBtn').click(function() {
+                $('#box').slideDown(500);
+            });
+
+            $('#slideToggleBtn').click(function() {
+                $('#box').slideToggle(500);
+            });
+
+            $('#animateBtn').click(function() {
+                $('#box').animate({
+                    marginLeft: '100px',
+                    fontSize: '30px',
+                    opacity: 0.5
+                }, 1000).animate({
+                    marginLeft: '0px',
+                    fontSize: '24px',
+                    opacity: 1
+                }, 1000);
+            });
+
+            // CSS Style Manipulation
+            $('#colorBtn').click(function() {
+                var colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6'];
+                var randomColor = colors[Math.floor(Math.random() * colors.length)];
+                $('#box').css('background-color', randomColor);
+            });
+
+            $('#sizeBtn').click(function() {
+                $('#box').css({
+                    'padding': '60px',
+                    'font-size': '32px'
+                });
+            });
+
+            $('#borderBtn').click(function() {
+                $('#box').css({
+                    'border': '5px solid #2c3e50',
+                    'border-radius': '50px'
+                });
+            });
+
+            $('#rotateBtn').click(function() {
+                $('#box').css('transform', 'rotate(5deg)');
+            });
+
+            $('#shadowBtn').click(function() {
+                $('#box').css('box-shadow', '0 10px 30px rgba(0,0,0,0.5)');
+            });
+
+            $('#resetBtn').click(function() {
+                $('#box').css({
+                    'background-color': '#3498db',
+                    'padding': '40px',
+                    'font-size': '24px',
+                    'border': 'none',
+                    'border-radius': '10px',
+                    'transform': 'rotate(0deg)',
+                    'box-shadow': 'none'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

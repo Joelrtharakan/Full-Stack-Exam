@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Styles</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #myDiv {
+      background-color: rgb(12, 206, 240);
+      color: black;
+      width: 400px;
+      height: 200px;
+      margin: 20px auto;
+      line-height: 150px;
+      border: 1px solid black;
+      border-radius: 0px;
+      opacity: 1;
+    }
+    .controls {
+      display: inline-block;
+      text-align: left;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>JavaScript Control</h2>
+  <div id="myDiv">URK23AI1001</div>
+
+  <div class="controls">
+    <label>Background Color:</label>
+    <input type="color" id="bgColor" onchange="updateStyle()">
+
+    <label>Text Color:</label>
+    <input type="color" id="textColor" onchange="updateStyle()"><br><br>
+
+    <label>Text Size:</label>
+    <input type="number" id="fontSize" placeholder="20" onkeyup="updateStyle()"><br><br>
+
+    <label>Box Width:</label>
+    <input type="number" id="boxWidth" placeholder="200" onkeyup="updateStyle()"><br><br>
+
+    <label>Box Height:</label>
+    <input type="number" id="boxHeight" placeholder="150" onkeyup="updateStyle()"><br><br>
+
+    <label>Border Radius:</label>
+    <input type="range" id="borderRadius" min="0" max="100" onchange="updateStyle()"><br><br>
+
+    <label>Opacity:</label>
+    <input type="range" id="opacity" min="0" max="1" step="0.1" onchange="updateStyle()">
+  </div>
+
+  <script>
+    function updateStyle() {
+      var div = document.getElementById("myDiv");
+    
+      var bgColor = document.getElementById("bgColor").value;
+      var textColor = document.getElementById("textColor").value;
+      var fontSize = document.getElementById("fontSize").value;
+      var boxWidth = document.getElementById("boxWidth").value;
+      var boxHeight = document.getElementById("boxHeight").value;
+      var borderRadius = document.getElementById("borderRadius").value;
+      var opacity = document.getElementById("opacity").value;
+    
+      if (bgColor) div.style.backgroundColor = bgColor;
+      if (textColor) div.style.color = textColor;
+      if (fontSize) div.style.fontSize = fontSize + "px";
+      if (boxWidth) div.style.width = boxWidth + "px";
+      if (boxHeight) div.style.height = boxHeight + "px";
+      if (borderRadius) div.style.borderRadius = borderRadius + "px";
+      if (opacity) div.style.opacity = opacity;
+    }
+  </script>
+</body>
+</html>

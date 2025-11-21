@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Product Inventory Management</h2>
+        
+        <div>
+            <input type="text" id="productName" placeholder="Product Name">
+            <input type="number" id="productPrice" placeholder="Price">
+            <input type="number" id="productQty" placeholder="Quantity">
+            <button onclick="addProduct()">Add Product</button>
+        </div>
+        
+        <input type="text" id="searchBox" placeholder="Search products..." onkeyup="searchProducts()">
+        
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="productList">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let products = [];
+        let nextId = 1;
+
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const qty = parseInt(document.getElementById('productQty').value);
+            
+            if (name && price > 0 && qty > 0) {
+                products.push({
+                    id: nextId++,
+                    name: name,
+                    price: price,
+                    quantity: qty
+                });
+                
+                displayProducts();
+                
+                document.getElementById('productName').value = '';
+                document.getElementById('productPrice').value = '';
+                document.getElementById('productQty').value = '';
+            }
+        }
+
+        function deleteProduct(id) {
+            products = products.filter(p => p.id !== id);
+            displayProducts();
+        }
+
+        function displayProducts(filteredProducts = products) {
+            const tbody = document.getElementById('productList');
+            tbody.innerHTML = '';
+            
+            filteredProducts.forEach(product => {
+                const total = product.price * product.quantity;
+                const row = `<tr>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>$${product.price.toFixed(2)}</td>
+                    <td>${product.quantity}</td>
+                    <td>$${total.toFixed(2)}</td>
+                    <td><button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button></td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filtered);
+        }
+    </script>
+</body>
+</html>

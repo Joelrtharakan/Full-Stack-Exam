@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html ng-app="gradeApp">
+<head>
+    <title>Student Grade Evaluation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .header {
+            background-color: #0066ff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #ff6666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 26px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            color: #0099cc;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #999;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #0099cc;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        button {
+            background-color: #0099ff;
+            color: white;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0077cc;
+        }
+        .divider {
+            height: 2px;
+            background-color: #00cccc;
+            margin: 30px 0;
+        }
+        .results {
+            margin-top: 30px;
+        }
+        .results h3 {
+            color: #00cc66;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .result-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .result-label {
+            background-color: #00cc66;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            width: 200px;
+            font-size: 16px;
+        }
+        .result-value {
+            color: #ff6666;
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body ng-controller="GradeController">
+    <div class="header">My College</div>
+    
+    <div class="container">
+        <h2>Grade Evaluation</h2>
+        
+        <div class="form-group">
+            <label>Student Name</label>
+            <input type="text" ng-model="studentName" placeholder="Enter student name">
+        </div>
+        
+        <div class="form-group">
+            <label>Student RegNo</label>
+            <input type="text" ng-model="regNo" placeholder="Enter registration number">
+        </div>
+        
+        <div class="form-group">
+            <label>Course 1 Marks</label>
+            <input type="number" ng-model="course1" placeholder="Enter marks">
+        </div>
+        
+        <div class="form-group">
+            <label>Course 2 Marks</label>
+            <input type="number" ng-model="course2" placeholder="Enter marks">
+        </div>
+        
+        <div class="form-group">
+            <label>Course 3 Marks</label>
+            <input type="number" ng-model="course3" placeholder="Enter marks">
+        </div>
+        
+        <div class="form-group">
+            <label>Course 4 Marks</label>
+            <input type="number" ng-model="course4" placeholder="Enter marks">
+        </div>
+        
+        <div class="form-group">
+            <label>Course 5 Marks</label>
+            <input type="number" ng-model="course5" placeholder="Enter marks">
+        </div>
+        
+        <div class="btn-container">
+            <button ng-click="calculateGrade()">Find Grade</button>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="results" ng-show="showResults">
+            <h3>Grade Details</h3>
+            
+            <div class="result-row">
+                <div class="result-label">Average Marks</div>
+                <div class="result-value">{{averageMarks}}</div>
+            </div>
+            
+            <div class="result-row">
+                <div class="result-label">Grade</div>
+                <div class="result-value">{{grade}}</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var app = angular.module('gradeApp', []);
+        
+        app.controller('GradeController', function($scope) {
+            $scope.showResults = false;
+            
+            $scope.calculateGrade = function() {
+                var marks1 = parseFloat($scope.course1) || 0;
+                var marks2 = parseFloat($scope.course2) || 0;
+                var marks3 = parseFloat($scope.course3) || 0;
+                var marks4 = parseFloat($scope.course4) || 0;
+                var marks5 = parseFloat($scope.course5) || 0;
+                
+                var average = (marks1 + marks2 + marks3 + marks4 + marks5) / 5;
+                $scope.averageMarks = average.toFixed(1);
+                
+                if (average > 95) {
+                    $scope.grade = 'S';
+                } else if (average > 85) {
+                    $scope.grade = 'A';
+                } else if (average > 75) {
+                    $scope.grade = 'B';
+                } else if (average > 65) {
+                    $scope.grade = 'C';
+                } else if (average >= 50) {
+                    $scope.grade = 'P';
+                } else {
+                    $scope.grade = 'F';
+                }
+                
+                $scope.showResults = true;
+            };
+        });
+    </script>
+</body>
+</html>

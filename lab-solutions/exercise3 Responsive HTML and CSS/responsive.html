@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Karunya Institute of Technology and Sciences</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: darkblue;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .about-section {
+            background-color: #f5e6d3;
+            padding: 30px;
+        }
+
+        .about-section h2 {
+            color: darkblue;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .about-section p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        .departments {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .dept-card {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .dept-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dept-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .campus-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .campus-text {
+            background-color: #f5e6d3;
+            padding: 40px;
+        }
+
+        .campus-text h2 {
+            color: darkblue;
+            margin-bottom: 15px;
+        }
+
+        .campus-text p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        .campus-image {
+            height: 300px;
+        }
+
+        .campus-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .drone-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .drone-image {
+            height: 350px;
+        }
+
+        .drone-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .drone-text {
+            background-color: #f5e6d3;
+            padding: 40px;
+        }
+
+        .drone-text h2 {
+            color: darkblue;
+            margin-bottom: 15px;
+        }
+
+        .drone-text p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .departments {
+                grid-template-columns: 1fr;
+            }
+
+            .campus-section {
+                grid-template-columns: 1fr;
+            }
+
+            .drone-section {
+                grid-template-columns: 1fr;
+            }
+
+            .dept-card,
+            .campus-image,
+            .drone-image {
+                height: 200px;
+            }
+
+            .campus-text,
+            .drone-text {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .banner {
+                height: 150px;
+            }
+
+            .about-section {
+                padding: 15px;
+            }
+
+            .dept-label {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            .campus-text,
+            .drone-text {
+                padding: 15px;
+            }
+
+            .campus-text h2,
+            .drone-text h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Karunya Institute of Technology and Sciences</h1>
+    </div>
+
+    <img src="karunya-hero.jpg" alt="Campus Banner" class="banner">
+
+    <div class="about-section">
+        <h2>About Us</h2>
+        <p>Karunya Institute of Technology and Sciences, was founded with the noble vision to raise professionals and leaders of high academic calibre and unblemished character, animated with a strong motivation and commitment to serve humanity. The institution is the fulfillment of the vision of the founder, Late Dr. D. G. S. Dhinakaran and the present Chancellor Dr. Paul Dhinakaran. Established in 1986 as an Engineering College, it was granted an autonomous status in 1999 and declared Deemed-to-be University by the University Grants Commission-UGC in recognition of its academic excellence by the Ministry of Human Resources Development under section 3 of the UGC Act, 1956 vide notification no 9-3-2000-U3 dated 25.6.2004 of the Government of India. Accredited by NAAC, the institution offers a wide array of Bachelors, Masters and Doctoral Degree programmes in various branches of Engineering, Biotechnology, Food processing and Agricultural Sciences. From a humble beginning of 180 students, the institution has rapidly grown to 8491 students and 452 faculty representing 18 academic departments in the three decades of service to higher education. Karunya Institute of Technology and Sciences has made significant progression in teaching learning, research and consultancy, innovation and transfer of technology, community service and value education. Translating the vision of the Founders into action, the institution is currently engaged in finding solutions to human problems in the four major areas such as Water, Food, Healthcare, and Energy through scientific and technological interventions.</p>
+    </div>
+
+    <div class="departments">
+        <div class="dept-card">
+            <img src="pic (1).png" alt="CSE">
+            <div class="dept-label">CSE</div>
+        </div>
+        <div class="dept-card">
+            <img src="pic (2).png" alt="Library">
+            <div class="dept-label">LIBRARY</div>
+        </div>
+        <div class="dept-card">
+            <img src="pic (3).png" alt="Biotech">
+            <div class="dept-label">BIOTECH</div>
+        </div>
+    </div>
+
+    <div class="campus-section">
+        <div class="campus-text">
+            <h2>Campus Life</h2>
+            <p>Karunya is a residential institution, hosts diverse, creative and talented people from the state of India and from different parts of the world with a safe, secure environment and a plethora of student activities, the campus life at Karunya is vibrant, colourful, entertaining and engaging.</p>
+        </div>
+        <div class="campus-image">
+            <img src="testimonial (1).png" alt="Campus Life">
+        </div>
+    </div>
+
+    <div class="drone-section">
+        <div class="drone-image">
+            <img src="testimonial (2).png" alt="Drone">
+        </div>
+        <div class="drone-text">
+            <h2>Drone Technology for Agricultural Mission</h2>
+            <p>Agriculture being the backbone of Indian economy, it has to be supported with emerging tools and emerging tech such as drone technology. Drones are being used for GIS mapping and other related works, having a potential to solve several problems in Agriculture. KITS has made it a mission to develop Drones for scouting lands and crops, inspecting weeds, monitoring and management of crops and monitoring and managing the grazing areas and health of livestock.</p>
+        </div>
+    </div>
+</body>
+</html>

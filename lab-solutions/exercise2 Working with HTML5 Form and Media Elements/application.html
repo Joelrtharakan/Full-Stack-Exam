@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .header h1 {
+            color: blue;
+            margin: 0;
+        }
+
+        .nav {
+            text-align: center;
+            padding: 15px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .nav a {
+            margin: 0 15px;
+            text-decoration: underline;
+            color: blue;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .form-title {
+            text-align: center;
+            color: blue;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        .form-row label {
+            display: inline-block;
+            width: 180px;
+            color: blue;
+            font-weight: bold;
+        }
+
+        .form-row input[type="text"],
+        .form-row input[type="password"],
+        .form-row input[type="date"],
+        .form-row input[type="number"],
+        .form-row input[type="tel"],
+        .form-row input[type="email"],
+        .form-row input[type="file"],
+        .form-row select,
+        .form-row textarea {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #999;
+        }
+
+        .form-row textarea {
+            vertical-align: top;
+        }
+
+        .submit-btn {
+            margin-left: 180px;
+            padding: 10px 30px;
+            background-color: white;
+            border: 1px solid #999;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            margin-left: 180px;
+            margin-top: 10px;
+        }
+
+        .progress-text {
+            color: blue;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Company Name</h1>
+    </div>
+
+    <div class="nav">
+        <a href="#">Media Elements</a>
+        <a href="#">Application Form</a>
+    </div>
+
+    <div class="form-container">
+        <h2 class="form-title">Application Form</h2>
+
+        <form>
+            <div class="form-row">
+                <label>Name</label>
+                <input type="text" placeholder="Enter your name">
+            </div>
+
+            <div class="form-row">
+                <label>Application Number</label>
+                <input type="text" value="KU2021CSE1001" readonly>
+            </div>
+
+            <div class="form-row">
+                <label>Password :</label>
+                <input type="password" value="********">
+            </div>
+
+            <div class="form-row">
+                <label>Date of Birth :</label>
+                <input type="date">
+            </div>
+
+            <div class="form-row">
+                <label>Age</label>
+                <input type="number">
+            </div>
+
+            <div class="form-row">
+                <label>Mobile Number :</label>
+                <input type="tel" placeholder="Enter Mobile Number">
+            </div>
+
+            <div class="form-row">
+                <label>Email :</label>
+                <input type="email" placeholder="Enter Email Id">
+            </div>
+
+            <div class="form-row">
+                <label>Gender :</label>
+                <input type="radio" name="gender" value="male"> Male
+                <input type="radio" name="gender" value="female"> Female
+            </div>
+
+            <div class="form-row">
+                <label>Address :</label>
+                <textarea rows="4"></textarea>
+            </div>
+
+            <div class="form-row">
+                <label>Languages Known :</label>
+                <input type="checkbox" name="lang" value="english"> English
+                <input type="checkbox" name="lang" value="tamil"> Tamil
+                <input type="checkbox" name="lang" value="malayalam"> Malayalam
+                <input type="checkbox" name="lang" value="telugu"> Telugu
+                <input type="checkbox" name="lang" value="hindi"> Hindi
+            </div>
+
+            <div class="form-row">
+                <label>Select your Course</label>
+                <select>
+                    <option>B Tech Computer Science and Engineering</option>
+                    <option>B Tech Information Technology</option>
+                    <option>B Tech Electronics and Communication</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label>Upload your Photo</label>
+                <input type="file">
+            </div>
+
+            <div class="progress-bar">
+                <progress value="50" max="100" style="width: 300px;"></progress>
+                <div class="progress-text">50% Uploading Completed</div>
+            </div>
+
+            <div class="form-row">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

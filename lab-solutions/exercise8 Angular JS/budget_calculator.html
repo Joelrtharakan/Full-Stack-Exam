@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html ng-app="budgetApp">
+<head>
+    <title>Budget Calculator App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background-color: #e8e8e8;
+        }
+
+        h1 {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 20px 0;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: 2px solid black;
+            margin: 5px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        .results {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            padding: 20px;
+            color: white;
+            font-weight: bold;
+            min-width: 140px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body ng-controller="BudgetController">
+    <h1>Budget Calculator App</h1>
+
+    <div class="container">
+        <h2>Enter Amount that you want to Manage</h2>
+        <input type="number" ng-model="amount">
+
+        <h2>How would you like to divide your money?</h2>
+        <div>
+            Room Rent(%): <input type="number" ng-model="rent">
+            Accessories(%): <input type="number" ng-model="acc">
+            Emergency(%): <input type="number" ng-model="emer">
+            Saving(%): <input type="number" ng-model="save">
+        </div>
+
+        <button ng-click="calculate()">Evaluate My Money</button>
+
+        <div class="error" ng-show="error">{{ error }}</div>
+
+        <div class="results" ng-show="show">
+            <div class="box" style="background-color: blue;">
+                Room Rent<br>Rs.{{ rentAmt }}
+            </div>
+            <div class="box" style="background-color: green;">
+                Accessories<br>Rs.{{ accAmt }}
+            </div>
+            <div class="box" style="background-color: blue;">
+                Emergency<br>Rs.{{ emerAmt }}
+            </div>
+            <div class="box" style="background-color: magenta;">
+                Saving<br>Rs.{{ saveAmt }}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        angular.module('budgetApp', []).controller('BudgetController', function($scope) {
+            $scope.calculate = function() {
+                var total = parseFloat($scope.rent || 0) + parseFloat($scope.acc || 0) + 
+                           parseFloat($scope.emer || 0) + parseFloat($scope.save || 0);
+
+                if (total !== 100) {
+                    $scope.error = 'Error: Total percentage must be 100%!';
+                    $scope.show = false;
+                    return;
+                }
+
+                $scope.error = '';
+                $scope.show = true;
+
+                $scope.rentAmt = ($scope.amount * $scope.rent / 100).toFixed(0);
+                $scope.accAmt = ($scope.amount * $scope.acc / 100).toFixed(0);
+                $scope.emerAmt = ($scope.amount * $scope.emer / 100).toFixed(0);
+                $scope.saveAmt = ($scope.amount * $scope.save / 100).toFixed(0);
+            };
+        });
+    </script>
+</body>
+</html>

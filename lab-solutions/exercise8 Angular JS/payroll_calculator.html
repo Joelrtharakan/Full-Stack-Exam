@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html ng-app="payrollApp">
+<head>
+    <title>Employee Payroll Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: red;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            color: blue;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: blue;
+            color: white;
+            border: none;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-row {
+            display: flex;
+            margin: 10px 0;
+        }
+
+        .result-label {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            flex: 1;
+            font-weight: bold;
+        }
+
+        .result-value {
+            background-color: white;
+            color: red;
+            padding: 10px;
+            flex: 1;
+            border: 1px solid #ccc;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body ng-controller="PayrollController">
+    <h1>Employee Payroll Calculator</h1>
+
+    <label>Employee Name:</label>
+    <input type="text" ng-model="empName">
+
+    <label>Emp.ID:</label>
+    <input type="text" ng-model="empId">
+
+    <label>Salary Date:</label>
+    <input type="date" ng-model="salaryDate">
+
+    <label>Basic Salary:</label>
+    <input type="number" ng-model="basicSalary">
+
+    <label>House Rent Allowance(HRA):</label>
+    <input type="number" ng-model="hra">
+
+    <label>Dearness Allowance(DA):</label>
+    <input type="number" ng-model="da">
+
+    <button ng-click="calculateSalary()">Calculate Salary</button>
+
+    <div class="results" ng-show="showResults">
+        <h2>Salary Details</h2>
+
+        <div class="result-row">
+            <div class="result-label">Employee Name</div>
+            <div class="result-value">{{ empName }}</div>
+        </div>
+
+        <div class="result-row">
+            <div class="result-label">Emp.ID</div>
+            <div class="result-value">{{ empId }}</div>
+        </div>
+
+        <div class="result-row">
+            <div class="result-label">Salary Date</div>
+            <div class="result-value">{{ salaryDate }}</div>
+        </div>
+
+        <div class="result-row">
+            <div class="result-label">Gross Salary</div>
+            <div class="result-value">Rs.{{ grossSalary }}</div>
+        </div>
+
+        <div class="result-row">
+            <div class="result-label">Net Salary</div>
+            <div class="result-value">Rs.{{ netSalary }}</div>
+        </div>
+
+        <div class="result-row">
+            <div class="result-label">Tax Deducted</div>
+            <div class="result-value">Rs.{{ taxAmount }}</div>
+        </div>
+    </div>
+
+    <script>
+        angular.module('payrollApp', []).controller('PayrollController', function($scope) {
+            $scope.showResults = false;
+
+            $scope.calculateSalary = function() {
+                var basic = parseFloat($scope.basicSalary) || 0;
+                var hraAmt = parseFloat($scope.hra) || 0;
+                var daAmt = parseFloat($scope.da) || 0;
+
+                // Calculate Gross Salary
+                $scope.grossSalary = basic + hraAmt + daAmt;
+
+                // Calculate Tax
+                var taxRate = 0;
+                if ($scope.grossSalary > 80000) {
+                    taxRate = 0.20;
+                } else if ($scope.grossSalary > 60000) {
+                    taxRate = 0.15;
+                } else if ($scope.grossSalary > 40000) {
+                    taxRate = 0.10;
+                } else if ($scope.grossSalary > 20000) {
+                    taxRate = 0.05;
+                }
+
+                $scope.taxAmount = ($scope.grossSalary * taxRate).toFixed(0);
+                $scope.netSalary = ($scope.grossSalary - $scope.taxAmount).toFixed(0);
+                $scope.grossSalary = $scope.grossSalary.toFixed(0);
+
+                $scope.showResults = true;
+            };
+        });
+    </script>
+</body>
+</html>
